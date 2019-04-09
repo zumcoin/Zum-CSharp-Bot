@@ -1,0 +1,38 @@
+{
+  "databaseFile": "ZUM.db",
+  "logLevel": 2,
+  "botToken": "{BOT_TOKEN}",
+  "botPrefix": ".",
+  "botMessageCache": 100,
+  "coinName": "ZUM",
+  "coinSymbol": "ZUM",
+  "coinUnits": 100000000,
+  "coinAddressLength": 99,
+  "coinAddressPrefix": "Zum",
+  "tipFee": 0.1,
+  "tipMixin": 3,
+  "tipSuccessReact": "💸",
+  "tipFailedReact": "🆘",
+  "tipLowBalanceReact": "❌",
+  "tipJoinReact": ":tip:",
+  "tipCustomReacts": {
+    ":kev:": 99.5,
+    ":99:": 99,
+    "🍆": 1234.56
+  },
+  "faucetHost": "https://faucet.trtl.me/",
+  "faucetEndpoint": "https://faucet.trtl.me/balance",
+  "faucetAddress": "Zum1ykG7FP1S6rDBKxrmY1cJD1MvFEYvu2PbFGp2BHHWTv4bz6FHDKeFGmqaeahHyFEc63Q7zvQcQ6Wo5FzR76fc5oSbk5ZtTTW",
+  "marketSource": "TradeOgre",
+  "marketEndpoint": "https://tradeogre.com/api/v1/ticker/BTC-TRTL",
+  "marketBTCEndpoint": "https://www.bitstamp.net/api/ticker/",
+  "marketDisallowedServers": [
+    388915017187328002
+  ],
+  "daemonHost": "127.0.0.1",
+  "daemonPort": 17935,
+  "walletHost": "127.0.0.1",
+  "walletPort": 17071,
+  "walletRpcPassword": "LetMe1nNow",
+  "walletUpdateDelay": 500
+}
