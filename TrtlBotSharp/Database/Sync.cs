@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    public partial class TrtlBotSharp
+    public partial class ZumBotSharp
     {
         // Gets last sync height
         public static int GetSyncHeight()

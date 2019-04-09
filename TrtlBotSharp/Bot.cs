@@ -8,9 +8,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    partial class TrtlBotSharp
+    partial class ZumBotSharp
     {
         // Initialization
         public static void Main(string[] args)
@@ -34,9 +34,9 @@ namespace TrtlBotSharp
             SocketConfig.MessageCacheSize = botMessageCache;
 
             // Load local files
-            Log(0, "TrtlBot", "Loading config");
+            Log(0, "ZumBot", "Loading config");
             await LoadConfig();
-            Log(0, "TrtlBot", "Loading database");
+            Log(0, "ZumBot", "Loading database");
             await LoadDatabase();
 
             // Populate API variables
@@ -52,13 +52,13 @@ namespace TrtlBotSharp
             _client.Ready += Ready;
 
             // Register commands and start bot
-            Log(0, "TrtlBot", "Starting discord client");
+            Log(0, "ZumBot", "Starting discord client");
             await RegisterCommandsAsync();
             await _client.LoginAsync(TokenType.Bot, botToken);
             await _client.StartAsync();
 
             // Set tip bot address
-            Log(0, "TrtlBot", "Setting default address");
+            Log(0, "ZumBot", "Setting default address");
             await SetAddress();
 
             // Rest until a disconnect is detected
@@ -72,7 +72,7 @@ namespace TrtlBotSharp
             // Begin wallet monitoring once gateway reports as ready
             if (!Monitoring)
             {
-                Log(0, "TrtlBot", "Starting wallet monitor");
+                Log(0, "ZumBot", "Starting wallet monitor");
                 BeginMonitoring();
                 Monitoring = true;
             }
@@ -99,7 +99,7 @@ namespace TrtlBotSharp
 
             // Restart if disconnected
             if (arg.Message.Contains("Disconnected"))
-                Log(0, "TrtlBot", "Restarting bot...");
+                Log(0, "ZumBot", "Restarting bot...");
 
             // Completed
             return Task.CompletedTask;

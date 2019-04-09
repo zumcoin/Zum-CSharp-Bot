@@ -20,11 +20,11 @@
     ":99:": 99,
     "🍆": 1234.56
   },
-  "faucetHost": "https://faucet.trtl.me/",
-  "faucetEndpoint": "https://faucet.trtl.me/balance",
+  "faucetHost": "https://faucet.Zum.me/",
+  "faucetEndpoint": "https://faucet.Zum.me/balance",
   "faucetAddress": "Zum1ykG7FP1S6rDBKxrmY1cJD1MvFEYvu2PbFGp2BHHWTv4bz6FHDKeFGmqaeahHyFEc63Q7zvQcQ6Wo5FzR76fc5oSbk5ZtTTW",
   "marketSource": "TradeOgre",
-  "marketEndpoint": "https://tradeogre.com/api/v1/ticker/BTC-TRTL",
+  "marketEndpoint": "https://tradeogre.com/api/v1/ticker/BTC-Zum",
   "marketBTCEndpoint": "https://www.bitstamp.net/api/ticker/",
   "marketDisallowedServers": [
     388915017187328002

@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
     class Request
     {
@@ -28,7 +28,7 @@ namespace TrtlBotSharp
                 if (Password != null) JRequest.Add(new JProperty("password", Password));
                 string Request = JRequest.ToString();
 
-                if (Method != "getStatus" && TrtlBotSharp.logLevel >= 3) Console.WriteLine(Request);
+                if (Method != "getStatus" && ZumBotSharp.logLevel >= 3) Console.WriteLine(Request);
 
                 // Send bytes to server
                 byte[] ByteArray = Encoding.UTF8.GetBytes(Request);
@@ -43,7 +43,7 @@ namespace TrtlBotSharp
 
                 // Get response
                 Result = JObject.Parse(reader.ReadToEnd());
-                if (Method != "getStatus" && TrtlBotSharp.logLevel >= 3) Console.WriteLine(Result.ToString());
+                if (Method != "getStatus" && ZumBotSharp.logLevel >= 3) Console.WriteLine(Result.ToString());
                 if (Result.ContainsKey("result")) Result = (JObject)Result["result"];
 
                 // Dispose of pieces
@@ -52,7 +52,7 @@ namespace TrtlBotSharp
             }
             catch (Exception e)
             {
-                TrtlBotSharp.Log(2, "TrtlBot", "Failed while sending request to host {0}: {1}", Host, e.Message);
+                ZumBotSharp.Log(2, "ZumBot", "Failed while sending request to host {0}: {1}", Host, e.Message);
             }
             return Result;
         }
@@ -72,7 +72,7 @@ namespace TrtlBotSharp
             }
             catch
             {
-                TrtlBotSharp.Log(2, "TrtlBotSharp", "Failed while fetching data from host {0}", Host);
+                ZumBotSharp.Log(2, "ZumBotSharp", "Failed while fetching data from host {0}", Host);
             }
             return Result;
         }

@@ -2,9 +2,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <StartupObject>TrtlBotSharp.TrtlBotSharp</StartupObject>
+    <StartupObject>ZumBotSharp.ZumBotSharp</StartupObject>
     <FileUpgradeFlags>40</FileUpgradeFlags>
-    <UpgradeBackupLocation>C:\Users\jstewart\tipbot\trtl-bot-csharp\Backup\TrtlBotSharp\</UpgradeBackupLocation>
+    <UpgradeBackupLocation>C:\Users\jstewart\tipbot\Zum-bot-csharp\Backup\ZumBotSharp\</UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
   <ItemGroup>

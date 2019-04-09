@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrtlBotSharp", "TrtlBotSharp\TrtlBotSharp.csproj", "{CAF6BED6-FC1B-4D16-AFF7-7AAB86D97ED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZumBotSharp", "ZumBotSharp\ZumBotSharp.csproj", "{CAF6BED6-FC1B-4D16-AFF7-7AAB86D97ED8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseMigration", "DatabaseMigration\DatabaseMigration.csproj", "{86F33AF9-937F-4E72-BE95-11654E3D5EDC}"
 EndProject

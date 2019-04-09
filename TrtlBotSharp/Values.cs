@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    partial class TrtlBotSharp
+    partial class ZumBotSharp
     {
         // Discord.Net Variables
         public static DiscordSocketClient _client;
@@ -40,8 +40,8 @@ namespace TrtlBotSharp
         // Currency Variables
         public static string
             coinName = "TurtleCoin",
-            coinSymbol = "TRTL",
-            coinAddressPrefix = "TRTL";
+            coinSymbol = "Zum",
+            coinAddressPrefix = "Zum";
         public static decimal
             coinUnits = 100;
         public static int
@@ -65,14 +65,14 @@ namespace TrtlBotSharp
 
         // Faucet Variables
         public static string
-            faucetHost = "https://faucet.trtl.me/",
-            faucetEndpoint = "https://faucet.trtl.me/balance",
-            faucetAddress = "TRTLv14M1Q9223QdWMmJyNeY8oMjXs5TGP9hDc3GJFsUVdXtaemn1mLKA25Hz9PLu89uvDafx9A93jW2i27E5Q3a7rn8P2fLuVA";
+            faucetHost = "https://faucet.Zum.me/",
+            faucetEndpoint = "https://faucet.Zum.me/balance",
+            faucetAddress = "Zumv14M1Q9223QdWMmJyNeY8oMjXs5TGP9hDc3GJFsUVdXtaemn1mLKA25Hz9PLu89uvDafx9A93jW2i27E5Q3a7rn8P2fLuVA";
 
         // Market Variables
         public static string
             marketSource = "TradeOgre",
-            marketEndpoint = "https://tradeogre.com/api/v1/ticker/BTC-TRTL",
+            marketEndpoint = "https://tradeogre.com/api/v1/ticker/BTC-Zum",
             marketBTCEndpoint = "https://www.bitstamp.net/api/ticker/";
 
         // Daemon Variables

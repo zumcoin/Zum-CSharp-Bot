@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
     public partial class Commands : ModuleBase<SocketCommandContext>
     {
@@ -18,28 +18,28 @@ namespace TrtlBotSharp
             catch { }
 
             // Check that user hasn't already registered an address
-            if (TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
-                await Context.Message.Author.SendMessageAsync(string.Format("You have already registered an address, use {0}updatewallet if you'd like to update it", TrtlBotSharp.botPrefix));
+            if (ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
+                await Context.Message.Author.SendMessageAsync(string.Format("You have already registered an address, use {0}updatewallet if you'd like to update it", ZumBotSharp.botPrefix));
 
             // Check address validity
-            else if (!TrtlBotSharp.VerifyAddress(Address))
-                await Context.Message.Author.SendMessageAsync(string.Format("Address is not a valid {0} address!", TrtlBotSharp.coinName));
+            else if (!ZumBotSharp.VerifyAddress(Address))
+                await Context.Message.Author.SendMessageAsync(string.Format("Address is not a valid {0} address!", ZumBotSharp.coinName));
 
             // Check that address isn't in use by another user
-            else if (TrtlBotSharp.CheckAddressExists(Address))
+            else if (ZumBotSharp.CheckAddressExists(Address))
                 await Context.Message.Author.SendMessageAsync("Address is in use by another user");
 
             // Passed checks
             else
             {
                 // Register wallet into database
-                string PaymentId = TrtlBotSharp.RegisterWallet(Context.Message.Author.Id, Address);
+                string PaymentId = ZumBotSharp.RegisterWallet(Context.Message.Author.Id, Address);
 
                 // Begin building a response
                 var Response = new EmbedBuilder();
                 Response.WithTitle("Successfully registered your wallet!");
                 Response.Description = string.Format("Deposit {0} to start tipping!\n\n" +
-                    "Address:\n**{1}**\n\nPayment ID:\n**{2}**", TrtlBotSharp.coinSymbol, TrtlBotSharp.tipDefaultAddress, PaymentId);
+                    "Address:\n**{1}**\n\nPayment ID:\n**{2}**", ZumBotSharp.coinSymbol, ZumBotSharp.tipDefaultAddress, PaymentId);
 
                 // Send reply
                 await Context.Message.Author.SendMessageAsync("", false, Response);
@@ -54,25 +54,25 @@ namespace TrtlBotSharp
             catch { }
 
             // Check that user has registered an address, register it if not.
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
             {
                 await RegisterWalletAsync(Address, Remainder);
                 return;
             }
 
             // Check address validity
-            else if (!TrtlBotSharp.VerifyAddress(Address))
-                await Context.Message.Author.SendMessageAsync(string.Format("Address is not a valid {0} address!", TrtlBotSharp.coinName));
+            else if (!ZumBotSharp.VerifyAddress(Address))
+                await Context.Message.Author.SendMessageAsync(string.Format("Address is not a valid {0} address!", ZumBotSharp.coinName));
 
             // Check that address isn't in use by another user
-            else if (TrtlBotSharp.CheckAddressExists(Address))
+            else if (ZumBotSharp.CheckAddressExists(Address))
                 await Context.Message.Author.SendMessageAsync("Address is in use by another user");
 
             // Passed checks
             else
             {
                 // Update address in database
-                TrtlBotSharp.UpdateWallet(Context.Message.Author.Id, Address);
+                ZumBotSharp.UpdateWallet(Context.Message.Author.Id, Address);
 
                 // Reply with success
                 await Context.Message.Author.SendMessageAsync("Successfully updated your wallet");
@@ -87,21 +87,21 @@ namespace TrtlBotSharp
             catch { }
 
             // Check that user has registered an address
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
-                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can recieve tips! Use {0}help if you need any help.", TrtlBotSharp.botPrefix));
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
+                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can recieve tips! Use {0}help if you need any help.", ZumBotSharp.botPrefix));
 
             // User is registered
             else
             {
                 // Check if user is redirecting tips
-                bool Redirect = TrtlBotSharp.GetRedirect(Context.Message.Author.Id);
+                bool Redirect = ZumBotSharp.GetRedirect(Context.Message.Author.Id);
 
                 // Set new value
                 if (Redirect) Redirect = false;
                 else Redirect = true;
 
                 // Set redirect preference
-                TrtlBotSharp.SetRedirect(Context.Message.Author.Id, Redirect);
+                ZumBotSharp.SetRedirect(Context.Message.Author.Id, Redirect);
 
                 // Send reply
                 if (Redirect) await Context.Message.Author.SendMessageAsync("**Tip redirect preference changed**\nTips you receive will now go to your tip jar");
@@ -116,14 +116,14 @@ namespace TrtlBotSharp
             catch { }
 
             // Check that user has registered an address
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
-                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can recieve tips! Use {0}help if you need any help.", TrtlBotSharp.botPrefix));
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
+                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can recieve tips! Use {0}help if you need any help.", ZumBotSharp.botPrefix));
 
             // User is registered
             else
             {
                 // Set redirect preference
-                TrtlBotSharp.SetRedirect(Context.Message.Author.Id, Redirect);
+                ZumBotSharp.SetRedirect(Context.Message.Author.Id, Redirect);
 
                 // Send reply
                 if (Redirect) await Context.Message.Author.SendMessageAsync("**Tip redirect preference changed**\nTips you receive will now go to your tip jar");
@@ -140,13 +140,13 @@ namespace TrtlBotSharp
 
             // Try to grab address from the database
             string Address = "";
-            if (TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
-                Address = TrtlBotSharp.GetAddress(Context.Message.Author.Id);
+            if (ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
+                Address = ZumBotSharp.GetAddress(Context.Message.Author.Id);
 
             // Check if result is empty
             if (string.IsNullOrEmpty(Address))
                 await Context.Message.Author.SendMessageAsync(string.Format("You haven't registered a wallet! Use {0}help if you need any help.",
-                    TrtlBotSharp.botPrefix));
+                    ZumBotSharp.botPrefix));
 
             // Check if user is requesting their own wallet
             else await Context.Message.Author.SendMessageAsync(string.Format("**Your wallet:**```{0}```", Address));
@@ -160,8 +160,8 @@ namespace TrtlBotSharp
 
             // Try to grab address from the database
             string Address = "";
-            if (TrtlBotSharp.CheckUserExists(User.Id))
-                Address = TrtlBotSharp.GetAddress(User.Id);
+            if (ZumBotSharp.CheckUserExists(User.Id))
+                Address = ZumBotSharp.GetAddress(User.Id);
 
             // Check if result is empty
             if (string.IsNullOrEmpty(Address))
@@ -183,8 +183,8 @@ namespace TrtlBotSharp
 
             // Try to grab address from the database
             string Address = "";
-            if (TrtlBotSharp.CheckUserExists(UID))
-                Address = TrtlBotSharp.GetAddress(UID);
+            if (ZumBotSharp.CheckUserExists(UID))
+                Address = ZumBotSharp.GetAddress(UID);
 
             // Get requested user
             string Username = "";
@@ -212,13 +212,13 @@ namespace TrtlBotSharp
             catch { }
 
             // Check if user exists in user table
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
                 await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can deposit! Use {0}help if you need any help.",
-                    TrtlBotSharp.botPrefix));
+                    ZumBotSharp.botPrefix));
 
             // Send reply
             else await Context.Message.Author.SendMessageAsync(string.Format("**Deposit {0} to start tipping!**```Address:\n{1}\n\nPayment ID:\n{2}```", 
-                TrtlBotSharp.coinSymbol, TrtlBotSharp.tipDefaultAddress, TrtlBotSharp.GetPaymentId(Context.Message.Author.Id)));
+                ZumBotSharp.coinSymbol, ZumBotSharp.tipDefaultAddress, ZumBotSharp.GetPaymentId(Context.Message.Author.Id)));
         }
 
         [Command("withdraw")]
@@ -229,32 +229,32 @@ namespace TrtlBotSharp
             catch { }
 
             // Check if user exists in user table
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
             {
-                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can withdraw! Use {0}help if you need any help.", TrtlBotSharp.botPrefix));
+                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can withdraw! Use {0}help if you need any help.", ZumBotSharp.botPrefix));
                 return;
             }
 
             // Check that amount is over the minimum fee
-            else if (Convert.ToDecimal(Amount) < TrtlBotSharp.Minimum)//TrtlBotSharp.Fee)
+            else if (Convert.ToDecimal(Amount) < ZumBotSharp.Minimum)//ZumBotSharp.Fee)
             {
-                await ReplyAsync(string.Format("Amount must be at least {0:N} {1}", TrtlBotSharp.Minimum/*Fee*/, TrtlBotSharp.coinSymbol));
+                await ReplyAsync(string.Format("Amount must be at least {0:N} {1}", ZumBotSharp.Minimum/*Fee*/, ZumBotSharp.coinSymbol));
                 return;
             }
 
             // Check if user has enough balance
-            else if (TrtlBotSharp.GetBalance(Context.Message.Author.Id) < Convert.ToDecimal(Amount) + TrtlBotSharp.tipFee)
+            else if (ZumBotSharp.GetBalance(Context.Message.Author.Id) < Convert.ToDecimal(Amount) + ZumBotSharp.tipFee)
             {
                 await Context.Message.Author.SendMessageAsync(string.Format("Your balance is too low! Amount + Fee = **{0:N}** {1}",
-                    Convert.ToDecimal(Amount) + TrtlBotSharp.tipFee, TrtlBotSharp.coinSymbol));
-                await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipLowBalanceReact));
+                    Convert.ToDecimal(Amount) + ZumBotSharp.tipFee, ZumBotSharp.coinSymbol));
+                await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipLowBalanceReact));
             }
 
             // Send withdrawal
-            else if (TrtlBotSharp.Tip(Context.Message.Author.Id, TrtlBotSharp.GetAddress(Context.Message.Author.Id), Convert.ToDecimal(Amount)))
+            else if (ZumBotSharp.Tip(Context.Message.Author.Id, ZumBotSharp.GetAddress(Context.Message.Author.Id), Convert.ToDecimal(Amount)))
             {
                 // Send success react
-                await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipSuccessReact));
+                await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipSuccessReact));
             }
         }
 
@@ -266,18 +266,18 @@ namespace TrtlBotSharp
             catch { }
 
             // Check if user exists in user table
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
                 await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can check your tip jar balance! Use {0}help if you need any help.",
-                    TrtlBotSharp.botPrefix));
+                    ZumBotSharp.botPrefix));
 
             // Send reply with balance
             else
             {
                 // Get balance
-                decimal Balance = TrtlBotSharp.GetBalance(Context.Message.Author.Id);
+                decimal Balance = ZumBotSharp.GetBalance(Context.Message.Author.Id);
 
                 // Send reply
-                await Context.Message.Author.SendMessageAsync(string.Format("You have **{0:N}** {1} in your tip jar", Balance, TrtlBotSharp.coinSymbol));
+                await Context.Message.Author.SendMessageAsync(string.Format("You have **{0:N}** {1} in your tip jar", Balance, ZumBotSharp.coinSymbol));
             }
         }
 
@@ -285,22 +285,22 @@ namespace TrtlBotSharp
         public async Task TipAsync(string Amount, [Remainder]string Remainder = "")
         {
             // Check if user exists in user table
-            if (!TrtlBotSharp.CheckUserExists(Context.Message.Author.Id))
+            if (!ZumBotSharp.CheckUserExists(Context.Message.Author.Id))
             {
-                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can tip! Use {0}help if you need any help.", TrtlBotSharp.botPrefix));
+                await Context.Message.Author.SendMessageAsync(string.Format("You must register a wallet before you can tip! Use {0}help if you need any help.", ZumBotSharp.botPrefix));
                 return;
             }
 
             // Check that amount is over the minimum fee
-            if (Convert.ToDecimal(Amount) < TrtlBotSharp.Minimum)//TrtlBotSharp.Fee)
+            if (Convert.ToDecimal(Amount) < ZumBotSharp.Minimum)//ZumBotSharp.Fee)
             {
-                await ReplyAsync(string.Format("Amount must be at least {0:N} {1}", TrtlBotSharp.Minimum/*Fee*/, TrtlBotSharp.coinSymbol));
+                await ReplyAsync(string.Format("Amount must be at least {0:N} {1}", ZumBotSharp.Minimum/*Fee*/, ZumBotSharp.coinSymbol));
                 return;
             }
 
             // Check if an address is specified instead of mentioned users
             string Address = "";
-            if (Remainder.StartsWith(TrtlBotSharp.coinAddressPrefix) && Remainder.Length == TrtlBotSharp.coinAddressLength)
+            if (Remainder.StartsWith(ZumBotSharp.coinAddressPrefix) && Remainder.Length == ZumBotSharp.coinAddressLength)
                 Address = Remainder.Substring(0, 99);
 
             // Check that there is at least one mentioned user
@@ -316,22 +316,22 @@ namespace TrtlBotSharp
             List<ulong> TippableUsers = new List<ulong>();
             foreach (ulong Id in Users)
             {
-                if (TrtlBotSharp.CheckUserExists(Id) && Id != Context.Message.Author.Id)
+                if (ZumBotSharp.CheckUserExists(Id) && Id != Context.Message.Author.Id)
                     TippableUsers.Add(Id);
             }
 
             // Check that user has enough balance for the tip
-            if (Address == "" && TrtlBotSharp.GetBalance(Context.Message.Author.Id) < Convert.ToDecimal(Amount) * TippableUsers.Count + TrtlBotSharp.tipFee)
+            if (Address == "" && ZumBotSharp.GetBalance(Context.Message.Author.Id) < Convert.ToDecimal(Amount) * TippableUsers.Count + ZumBotSharp.tipFee)
             {
                 await Context.Message.Author.SendMessageAsync(string.Format("Your balance is too low! Amount + Fee = **{0:N}** {1}",
-                    Convert.ToDecimal(Amount) * TippableUsers.Count + TrtlBotSharp.tipFee, TrtlBotSharp.coinSymbol));
-                await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipLowBalanceReact));
+                    Convert.ToDecimal(Amount) * TippableUsers.Count + ZumBotSharp.tipFee, ZumBotSharp.coinSymbol));
+                await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipLowBalanceReact));
             }
-            else if (TrtlBotSharp.GetBalance(Context.Message.Author.Id) < Convert.ToDecimal(Amount) + TrtlBotSharp.tipFee)
+            else if (ZumBotSharp.GetBalance(Context.Message.Author.Id) < Convert.ToDecimal(Amount) + ZumBotSharp.tipFee)
             {
                 await Context.Message.Author.SendMessageAsync(string.Format("Your balance is too low! Amount + Fee = **{0:N}** {1}",
-                    Convert.ToDecimal(Amount) + TrtlBotSharp.tipFee, TrtlBotSharp.coinSymbol));
-                await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipLowBalanceReact));
+                    Convert.ToDecimal(Amount) + ZumBotSharp.tipFee, ZumBotSharp.coinSymbol));
+                await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipLowBalanceReact));
             }
 
             // Tip has required arguments
@@ -346,7 +346,7 @@ namespace TrtlBotSharp
                         {
                             if (!FailReactAdded)
                             {
-                                await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipFailedReact));
+                                await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipFailedReact));
                                 FailReactAdded = true;
                             }
 
@@ -356,7 +356,7 @@ namespace TrtlBotSharp
                                 Response.WithTitle(string.Format("{0} wants to tip you!", Context.Message.Author.Username));
                                 Response.Description = string.Format("Register your wallet with with `{0}registerwallet <your {1} address>` " +
                                     "to get started!\nTo create a wallet head to https://turtlecoin.lol/wallet/\nExtra Help: http://docs.turtlecoin.lol/",
-                                    TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol);
+                                    ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol);
 
                                 // Send reply
                                 await Context.Client.GetUser(User).SendMessageAsync("", false, Response);
@@ -365,16 +365,16 @@ namespace TrtlBotSharp
                         }
 
                     // Check that there is at least one user with a registered wallet
-                    if (TippableUsers.Count > 0 && TrtlBotSharp.Tip(Context.Message.Author.Id, TippableUsers, Convert.ToDecimal(Amount), Context.Message))
+                    if (TippableUsers.Count > 0 && ZumBotSharp.Tip(Context.Message.Author.Id, TippableUsers, Convert.ToDecimal(Amount), Context.Message))
                     {
                         // Send success react
-                        await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipSuccessReact));
+                        await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipSuccessReact));
                     }
                 }
-                else if (TrtlBotSharp.Tip(Context.Message.Author.Id, Address, Convert.ToDecimal(Amount)))
+                else if (ZumBotSharp.Tip(Context.Message.Author.Id, Address, Convert.ToDecimal(Amount)))
                 {
                     // Send success react
-                    await Context.Message.AddReactionAsync(new Emoji(TrtlBotSharp.tipSuccessReact));
+                    await Context.Message.AddReactionAsync(new Emoji(ZumBotSharp.tipSuccessReact));
                 }
             }
         }

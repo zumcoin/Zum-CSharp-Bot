@@ -2,9 +2,9 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    public partial class TrtlBotSharp
+    public partial class ZumBotSharp
     {
         // Database container
         public static SqliteConnection Database;

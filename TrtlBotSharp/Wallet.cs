@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    public partial class TrtlBotSharp
+    public partial class ZumBotSharp
     {
         // List of confirmed transactions
         public static Dictionary<string, JObject> ConfirmedTransactions = new Dictionary<string, JObject>();

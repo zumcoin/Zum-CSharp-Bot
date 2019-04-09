@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    public partial class TrtlBotSharp
+    public partial class ZumBotSharp
     {
         // Checks if a transaction exists in the database
         public static bool CheckTransactionExists(string TransactionHash)

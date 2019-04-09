@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    public partial class TrtlBotSharp
+    public partial class ZumBotSharp
     {
         // Checks if a transaction is a pending tip
         public static bool CheckIfPending(string TransactionHash)

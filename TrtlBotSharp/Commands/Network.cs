@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
     public partial class Commands : ModuleBase<SocketCommandContext>
     {
@@ -11,12 +11,12 @@ namespace TrtlBotSharp
         {
             // Get last block header from daemon and calculate hashrate
             decimal Hashrate = 0;
-            JObject Result = Request.RPC(TrtlBotSharp.daemonHost, TrtlBotSharp.daemonPort, "getlastblockheader");
+            JObject Result = Request.RPC(ZumBotSharp.daemonHost, ZumBotSharp.daemonPort, "getlastblockheader");
             if (Result.Count > 0 && !Result.ContainsKey("error"))
                 Hashrate = (decimal)Result["block_header"]["difficulty"] / 30;
 
             // Send reply
-            await ReplyAsync("The current global hashrate is **" + TrtlBotSharp.FormatHashrate(Hashrate) + "**");
+            await ReplyAsync("The current global hashrate is **" + ZumBotSharp.FormatHashrate(Hashrate) + "**");
         }
 
         [Command("difficulty")]
@@ -24,7 +24,7 @@ namespace TrtlBotSharp
         {
             // Get last block header from daemon and calculate hashrate
             decimal Difficulty = 0;
-            JObject Result = Request.RPC(TrtlBotSharp.daemonHost, TrtlBotSharp.daemonPort, "getlastblockheader");
+            JObject Result = Request.RPC(ZumBotSharp.daemonHost, ZumBotSharp.daemonPort, "getlastblockheader");
             if (Result.Count > 0 && !Result.ContainsKey("error"))
                 Difficulty = (decimal)Result["block_header"]["difficulty"];
 
@@ -37,7 +37,7 @@ namespace TrtlBotSharp
         {
             // Get height
             decimal Height = 0;
-            JObject Result = Request.GET("http://" + TrtlBotSharp.daemonHost + ":" + TrtlBotSharp.daemonPort + "/getinfo");
+            JObject Result = Request.GET("http://" + ZumBotSharp.daemonHost + ":" + ZumBotSharp.daemonPort + "/getinfo");
             if (Result.Count > 0 && !Result.ContainsKey("error"))
                 Height = (decimal)Result["height"];
 
@@ -50,10 +50,10 @@ namespace TrtlBotSharp
         public async Task SupplyAsync([Remainder]string Remainder = "")
         {
             // Get supply
-            decimal Supply = TrtlBotSharp.GetSupply();
+            decimal Supply = ZumBotSharp.GetSupply();
 
             // Send reply
-            await ReplyAsync(string.Format("The current circulating supply is **{0:N}** {1}", Supply, TrtlBotSharp.coinSymbol));
+            await ReplyAsync(string.Format("The current circulating supply is **{0:N}** {1}", Supply, ZumBotSharp.coinSymbol));
         }
     }
 }

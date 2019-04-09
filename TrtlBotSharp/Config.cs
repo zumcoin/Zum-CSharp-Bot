@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    partial class TrtlBotSharp
+    partial class ZumBotSharp
     {
         // Loads config values from file
         public static async Task LoadConfig()

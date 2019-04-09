@@ -3,7 +3,7 @@ using Discord.Commands;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
     public partial class Commands : ModuleBase<SocketCommandContext>
     {
@@ -18,98 +18,98 @@ namespace TrtlBotSharp
             // Requesting additional help
             if (Remainder.ToLower() == "faucet")
             {
-                Response.Title += string.Format(" - {0}faucet", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}faucet", TrtlBotSharp.botPrefix));
+                Response.Title += string.Format(" - {0}faucet", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}faucet", ZumBotSharp.botPrefix));
                 Response.AddField("Description:", "Gives faucet information, including the donation address, a link to the faucet, and how much it has left");
             }
             else if (Remainder.ToLower() == "hashrate")
             {
-                Response.Title += string.Format(" - {0}hashrate", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}hashrate", TrtlBotSharp.botPrefix));
+                Response.Title += string.Format(" - {0}hashrate", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}hashrate", ZumBotSharp.botPrefix));
                 Response.AddField("Description:", "Gives the current network hashrate");
             }
             else if (Remainder.ToLower() == "difficulty")
             {
-                Response.Title += string.Format(" - {0}difficulty", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}difficulty", TrtlBotSharp.botPrefix));
+                Response.Title += string.Format(" - {0}difficulty", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}difficulty", ZumBotSharp.botPrefix));
                 Response.AddField("Description:", "Gives the current network difficulty");
             }
             else if (Remainder.ToLower() == "height")
             {
-                Response.Title += string.Format(" - {0}height", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}height", TrtlBotSharp.botPrefix));
+                Response.Title += string.Format(" - {0}height", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}height", ZumBotSharp.botPrefix));
                 Response.AddField("Description:", "Gives the current network height");
             }
             else if (Remainder.ToLower() == "supply")
             {
-                Response.Title += string.Format(" - {0}supply", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}supply", TrtlBotSharp.botPrefix));
-                Response.AddField("Description:", string.Format("Gives the total circulating supply of {0}", TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}supply", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}supply", ZumBotSharp.botPrefix));
+                Response.AddField("Description:", string.Format("Gives the total circulating supply of {0}", ZumBotSharp.coinSymbol));
             }
             else if (Remainder.ToLower() == "registerwallet")
             {
-                Response.Title += string.Format(" - {0}registerwallet", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}registerwallet <{1} Address>", TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}registerwallet", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}registerwallet <{1} Address>", ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol));
                 Response.AddField("Description:", "Registers your address with the bot so you may send and recieve tips");
             }
             else if (Remainder.ToLower() == "updatewallet")
             {
-                Response.Title += string.Format(" - {0}updatewallet", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}updatewallet <{1} Address>", TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}updatewallet", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}updatewallet <{1} Address>", ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol));
                 Response.AddField("Description:", "Updates your registered wallet to a new address");
             }
             else if (Remainder.ToLower() == "wallet")
             {
-                Response.Title += string.Format(" - {0}uwallet", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}wallet\n{0}wallet <{1} Address>", TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}uwallet", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}wallet\n{0}wallet <{1} Address>", ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol));
                 Response.AddField("Description:", "Gets a specified user's registered wallet address, or your own if no address is specified");
             }
             else if (Remainder.ToLower() == "deposit")
             {
-                Response.Title += string.Format(" - {0}deposit", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}deposit", TrtlBotSharp.botPrefix));
+                Response.Title += string.Format(" - {0}deposit", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}deposit", ZumBotSharp.botPrefix));
                 Response.AddField("Description:", string.Format("DMs you with your deposit information, including the address to send to, " +
-                    "and the payment ID you **must** use when sending {0}", TrtlBotSharp.coinSymbol));
+                    "and the payment ID you **must** use when sending {0}", ZumBotSharp.coinSymbol));
             }
             else if (Remainder.ToLower() == "withdraw")
             {
-                Response.Title += string.Format(" - {0}withdraw", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}withdraw <Amount of {1}>", TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}withdraw", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}withdraw <Amount of {1}>", ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol));
                 Response.AddField("Description:", "Withdraws a specified amount from your tip jar into your registered wallet");
             }
             else if (Remainder.ToLower() == "balance")
             {
-                Response.Title += string.Format(" - {0}balance", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}balance", TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}balance", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}balance", ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol));
                 Response.AddField("Description:", "Gets your current tip jar balance");
             }
             else if (Remainder.ToLower() == "tip")
             {
-                Response.Title += string.Format(" - {0}tip", TrtlBotSharp.botPrefix);
+                Response.Title += string.Format(" - {0}tip", ZumBotSharp.botPrefix);
                 Response.AddField("Usage:", string.Format("{0}tip <Amount of {1}> @Users1 @User2...\n{0}tip <Amount of {1}> <{1} Address>", 
-                    TrtlBotSharp.botPrefix, TrtlBotSharp.coinSymbol));
+                    ZumBotSharp.botPrefix, ZumBotSharp.coinSymbol));
                 Response.AddField("Description:", string.Format("Sends a tip of a specified amount to one or more users *or* a specified {0} address", 
-                    TrtlBotSharp.coinSymbol));
+                    ZumBotSharp.coinSymbol));
             }
             else if (Remainder.ToLower() == "redirecttips")
             {
-                Response.Title += string.Format(" - {0}redirecttips", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}redirecttips\n{0}redirecttips <True or False>", TrtlBotSharp.botPrefix));
+                Response.Title += string.Format(" - {0}redirecttips", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}redirecttips\n{0}redirecttips <True or False>", ZumBotSharp.botPrefix));
                 Response.AddField("Description:", "Sets whether you'd like to have tips sent to you to go directly to your registered wallet " +
                     "(default) or redirected into your tip jar balance");
             }
 
-            else if (Remainder.ToLower() == "price" && (Context.Guild == null || !TrtlBotSharp.marketDisallowedServers.Contains(Context.Guild.Id)))
+            else if (Remainder.ToLower() == "price" && (Context.Guild == null || !ZumBotSharp.marketDisallowedServers.Contains(Context.Guild.Id)))
             {
-                Response.Title += string.Format(" - {0}price", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}price", TrtlBotSharp.botPrefix));
-                Response.AddField("Description:", string.Format("Gives the current price of {0} in USD and BTC", TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}price", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}price", ZumBotSharp.botPrefix));
+                Response.AddField("Description:", string.Format("Gives the current price of {0} in USD and BTC", ZumBotSharp.coinSymbol));
             }
-            else if (Remainder.ToLower() == "mcap" && (Context.Guild == null || !TrtlBotSharp.marketDisallowedServers.Contains(Context.Guild.Id)))
+            else if (Remainder.ToLower() == "mcap" && (Context.Guild == null || !ZumBotSharp.marketDisallowedServers.Contains(Context.Guild.Id)))
             {
-                Response.Title += string.Format(" - {0}mcap", TrtlBotSharp.botPrefix);
-                Response.AddField("Usage:", string.Format("{0}mcap", TrtlBotSharp.botPrefix));
-                Response.AddField("Description:", string.Format("Gives {0}'s current market capitalization", TrtlBotSharp.coinSymbol));
+                Response.Title += string.Format(" - {0}mcap", ZumBotSharp.botPrefix);
+                Response.AddField("Usage:", string.Format("{0}mcap", ZumBotSharp.botPrefix));
+                Response.AddField("Description:", string.Format("Gives {0}'s current market capitalization", ZumBotSharp.coinSymbol));
             }
 
             // No requested command
@@ -123,7 +123,7 @@ namespace TrtlBotSharp
                 Output += "  difficulty\tGives current network difficulty\n";
                 Output += "  height\tGives current network height\n";
                 Output += "  supply\tGives current circulating supply\n";
-                if (Context.Guild == null || !TrtlBotSharp.marketDisallowedServers.Contains(Context.Guild.Id))
+                if (Context.Guild == null || !ZumBotSharp.marketDisallowedServers.Contains(Context.Guild.Id))
                 {
                     Output += "Market:\n";
                     Output += "  price\tGives current price\n";
@@ -138,8 +138,8 @@ namespace TrtlBotSharp
                 Output += "  balance\tGives your current tip jar balance\n";
                 Output += "  tip\tTips one or more users a specified amount\n";
                 Output += "  redirecttips\tSets whether you'd like tips sent directly to your wallet or redirected back into your tip jar";
-                Output = string.Format("```" + TrtlBotSharp.Prettify(Output) + "```**Note:** You can use *{0}help <Name of Command>* for " +
-                    "additional help with any command", TrtlBotSharp.botPrefix);
+                Output = string.Format("```" + ZumBotSharp.Prettify(Output) + "```**Note:** You can use *{0}help <Name of Command>* for " +
+                    "additional help with any command", ZumBotSharp.botPrefix);
                 Response.WithDescription(Output);
                 Response.WithTitle("Available Commands:");
             }
@@ -152,7 +152,7 @@ namespace TrtlBotSharp
         public async Task FaucetAsync([Remainder]string Remainder = "")
         {
             // Get faucet balance
-            JObject FaucetBalance = Request.GET(TrtlBotSharp.faucetEndpoint);
+            JObject FaucetBalance = Request.GET(ZumBotSharp.faucetEndpoint);
             if (FaucetBalance.Count < 1)
             {
                 await ReplyAsync("Failed to connect to faucet");
@@ -161,9 +161,9 @@ namespace TrtlBotSharp
 
             // Begin building a response
             var Response = new EmbedBuilder();
-            Response.WithTitle(string.Format("This faucet has {0:N} {1} left", (decimal)FaucetBalance["available"], TrtlBotSharp.coinSymbol));
-            Response.WithUrl(TrtlBotSharp.faucetHost);
-            Response.Description = "```Donations:\n" + TrtlBotSharp.faucetAddress + "```\n";
+            Response.WithTitle(string.Format("This faucet has {0:N} {1} left", (decimal)FaucetBalance["available"], ZumBotSharp.coinSymbol));
+            Response.WithUrl(ZumBotSharp.faucetHost);
+            Response.Description = "```Donations:\n" + ZumBotSharp.faucetAddress + "```\n";
 
             // Send reply
             await ReplyAsync("", false, Response);

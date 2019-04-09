@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
 
-namespace TrtlBotSharp
+namespace ZumBotSharp
 {
-    partial class TrtlBotSharp
+    partial class ZumBotSharp
     {
         // Update global tip stats
         public static void GlobalStats(string Type, ulong Server, ulong Channel, ulong Sender, decimal Amount, int Recipients)
